@@ -1,18 +1,27 @@
 {% extends 'base.html.twig' %}
+
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <h1>{{ 'user.sign-up'|trans }}</h1>
                 {{ form_start(form) }}
+                {{ form_errors(form) }}
 
                 {{ form_row(form.email) }}
                 {{ form_row(form.password) }}
 
+                <div class="g-recaptcha" data-sitekey="{{ captchakey }}"></div>
+
                 <button type="submit" class="btn btn-primary" formnovalidate>{{ 'user.sign-up'|trans }}</button>
-                {#<a href="{{ path('security_login') }}">{{ 'user.yes-account'|trans }}</a>#}
+                <a href="{{ path('security_login') }}">{{ 'user.yes-account'|trans }}</a>
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src='//www.google.com/recaptcha/api.js?hl=it'></script>
 {% endblock %}

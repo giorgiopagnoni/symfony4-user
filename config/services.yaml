@@ -2,8 +2,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'it'
-    app.double_opt_it: true
     app.email_noreply: noreply@ciao.it
+    app.recaptcha_key: 6LeFN0EUAAAAADHet8kTXcxC8kaZBjEUNit3REKf
+    app.recaptcha_secret: 6LeFN0EUAAAAAJ-YjcGsBnx6olLRUka2sQMSn1sI
 
 services:
     # default configuration for services in *this* file
@@ -31,3 +32,8 @@ services:
     App\Service\Mailer:
         arguments:
             $noreply: '%app.email_noreply%'
+
+    App\Service\CaptchaValidator:
+        arguments:
+            $key: '%app.recaptcha_key%'
+            $secret: '%app.recaptcha_secret%'

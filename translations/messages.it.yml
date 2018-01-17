@@ -32,7 +32,7 @@ user:
     reset-password.html: 'Clicca <a href="%resetPasswordUrl%" target="_blank">qui</a> per resettare la password'
     reset-password.txt: 'Clicca il link seguente per resettare la tua password %resetPasswordUrl%'
 
-captcha: Captcha
+captcha.wrong: Devi dimostrare di non essere un robot
 rememberme: Ricordami
 
 addresses: Indirizzi
