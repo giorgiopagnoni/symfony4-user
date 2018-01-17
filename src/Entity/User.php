@@ -38,7 +38,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\NotBlank(groups={"Registration", "PasswordReset"})
      * @Assert\Length(min="8")
      * @ComplexPassword()
      */

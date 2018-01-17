@@ -14,6 +14,7 @@ use App\Entity\User;
 use App\Form\Security\LoginType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
@@ -108,7 +109,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return parent::onAuthenticationSuccess($request, $token, $providerKey);
+        return new RedirectResponse($this->getDefaultSuccessRedirectUrl());
     }
 
     /**

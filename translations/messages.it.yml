@@ -6,7 +6,7 @@ user:
   password:
     first: Password
     second: Ripeti password
-  fullname: Nome completo
+  name: Nome
 
   not-found: Utente non trovato
 

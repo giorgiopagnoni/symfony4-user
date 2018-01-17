@@ -9,7 +9,7 @@
                 {{ form_row(form.email) }}
                 {{ form_row(form.password) }}
 
-                <button type="submit" class="btn btn-primary">{{ 'user.sign-up'|trans }}</button>
+                <button type="submit" class="btn btn-primary" formnovalidate>{{ 'user.sign-up'|trans }}</button>
                 {#<a href="{{ path('security_login') }}">{{ 'user.yes-account'|trans }}</a>#}
                 {{ form_end(form) }}
             </div>

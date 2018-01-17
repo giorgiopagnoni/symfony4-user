@@ -10,16 +10,19 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Form\User\EditType;
 use App\Form\User\RegistrationType;
+use App\Form\User\RequestResetPasswordType;
+use App\Form\User\ResetPasswordType;
 use App\Security\LoginFormAuthenticator;
 use App\Service\Mailer;
 use App\Service\TokenGenerator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 /**
@@ -92,6 +95,128 @@ class UserController extends AbstractController
             $loginFormAuthenticator,
             'main'
         );
+    }
+
+    /**
+     * @Route("/edit", name="user_edit")
+     * @Security("has_role('ROLE_USER')")
+     * @param $request Request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
+     */
+    public function edit(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $origPwd = $this->getUser()->getPassword();
+        $form = $this->createForm(EditType::class, $this->getUser());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            /** @var User $user */
+            $user = $form->getData();
+            $pwd = $user->getPassword() ? $encoder->encodePassword($user, $user->getPassword()) : $origPwd;
+            $user->setPassword($pwd);
+            $em = $this->getDoctrine()->getManager();
+
+            if ($form->isValid()) {
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('success', 'user.update.success');
+
+                return $this->redirect($this->generateUrl('homepage'));
+            }
+
+            // see http://stackoverflow.com/questions/9812510/symfony2-how-to-modify-the-current-users-entity-using-a-form
+            $em->refresh($user);
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/request-password-reset", name="user_request_password_reset")
+     * @param Request $request
+     * @param TokenGenerator  $tokenGenerator
+     * @param Mailer $mailer
+     * @return Response
+     */
+    public function requestPasswordReset(Request $request, TokenGenerator $tokenGenerator, Mailer $mailer)
+    {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        $form = $this->createForm(RequestResetPasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository = $this->getDoctrine()->getRepository(User::class);
+
+            /** @var User $user */
+            $user = $repository->findOneBy(['email' => $form->get('_username')->getData(), 'isActive' => true]);
+            if (!$user) {
+                $this->addFlash('warning', 'user.not-found');
+                return $this->render('user/request-password-reset.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
+
+            $token = $tokenGenerator->generateToken();
+            $user->setToken($token);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $mailer->sendResetPasswordEmailMessage($user);
+
+            $this->addFlash('success', 'user.request-password-link');
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('user/request-password-reset.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/reset-password/{token}", name="user_reset_password")
+     * @param $request Request
+     * @param $user User
+     * @param $authenticatorHandler GuardAuthenticatorHandler
+     * @param $loginFormAuthenticator LoginFormAuthenticator
+     * @return Response
+     */
+    public function resetPassword(Request $request, User $user, GuardAuthenticatorHandler $authenticatorHandler, LoginFormAuthenticator $loginFormAuthenticator)
+    {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        $form = $this->createForm(ResetPasswordType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
+            $user = $form->getData();
+            $user->setToken(null);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'user.update.success');
+
+            // automatic login
+            return $authenticatorHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $loginFormAuthenticator,
+                'main'
+            );
+        }
+
+        return $this->render('user/password-reset.html.twig', ['form' => $form->createView()]);
     }
 
 }
