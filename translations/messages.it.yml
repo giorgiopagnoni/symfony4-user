@@ -1,0 +1,45 @@
+site:
+  name: My Website
+
+user:
+  email: Email
+  password:
+    first: Password
+    second: Ripeti password
+  fullname: Nome completo
+
+  not-found: Utente non trovato
+
+  edit: Modifica
+  forgot-password: Ho dimenticato la password
+  login: Login
+  logout: Logout
+  no-account: Non ho un account
+  reset-password: Reset password
+  sign-up: Registrati
+  update:
+    success: Il tuo account è stato aggiornato
+    error: C'è stato un errore
+
+  welcome: Benvenuto! Hai fatto login con successo
+  yes-account: Ho già un account
+
+  activation-link: Un link per attivare il tuo account ti è stato inviato via email. Controlla!
+  request-password-link: Un link per resettare la password ti è stato inviato via email. Controlla!
+  mailer:
+    activation.html: 'Clicca <a href="%activationUrl%" target="_blank">qui</a> per attivare il tuo account'
+    activation.txt: 'Clicca il link seguente per attivare il tuo account %activationUrl%'
+    reset-password.html: 'Clicca <a href="%resetPasswordUrl%" target="_blank">qui</a> per resettare la password'
+    reset-password.txt: 'Clicca il link seguente per resettare la tua password %resetPasswordUrl%'
+
+captcha: Captcha
+rememberme: Ricordami
+
+addresses: Indirizzi
+address:
+  street: Via
+  zipcode: CAP
+  city: Città
+
+Tags: Descriviti
+tags.placeholder: Scegli uno o più aggettivi...

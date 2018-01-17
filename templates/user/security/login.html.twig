@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{{ 'user.login'|trans }}</h1>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                {{ form_start(form) }}
+                    {{ form_row(form._username) }}
+                    {{ form_row(form._password) }}
+                    {{ form_row(form.remember_me) }}
+                    <button type="submit" class="btn btn-success">{{ 'user.login'|trans }} <span class="fa fa-lock"></span></button>
+                    {#<a href="{{ path('connect_facebook') }}" class="btn btn-primary">#}
+                        {#<i class="fa fa-facebook" aria-hidden="true"></i>#}
+                    {#</a>#}
+                    {#<a href="{{ path('connect_google') }}" class="btn btn-danger">#}
+                        {#<i class="fa fa-google-plus" aria-hidden="true"></i>#}
+                    {#</a>#}
+                    {#<a href="{{ path('user_register') }}">{{ 'user.no-account'|trans }}</a> |#}
+                    {#<a href="{{ path('user_request_password_reset') }}">{{ 'user.forgot-password'|trans }}</a>#}
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

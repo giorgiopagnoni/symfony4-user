@@ -1,0 +1,4 @@
+user:
+  exists: Hai già un account con questa email
+  password:
+    must_be_complex: La password deve contenere almeno un numero, una lettera minuscola ed una maiuscola

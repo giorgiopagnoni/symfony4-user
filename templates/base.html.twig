@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/build/app.css">
+    {% endblock %}
+</head>
+
+<div class="main-content" style="margin-top: 50px;">
+    {% block flashmessages %}
+        {% if app.session.flashbag.peekAll|length > 0 %}
+            {% for type, messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissible alert-{{ type ? type : '' }}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        {{ message|trans({}, domain|default('messages')) }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+    {% block body %}{% endblock %}
+    <div style="min-height: 50px"></div> {# TODO temporaneo#}
+</div>
+
+<body>
+{% block content %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/build/app.js"></script>
+{% endblock %}
+
+</body>
+
+</html>

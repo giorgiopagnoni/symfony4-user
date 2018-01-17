@@ -1,0 +1,9 @@
+{% extends 'user/email/email-layout.html.twig' %}
+
+{% block body_text %}
+{{ 'user.mailer.activation.txt'|trans({'%activationUrl%' : activationUrl}) }}
+{% endblock %}
+
+{% block body_html_content %}
+    {{ 'user.mailer.activation.html'|trans({'%activationUrl%' : activationUrl})|raw }}
+{% endblock %}

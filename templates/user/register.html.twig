@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{{ 'user.sign-up'|trans }}</h1>
+                {{ form_start(form) }}
+
+                {{ form_row(form.email) }}
+                {{ form_row(form.password) }}
+
+                <button type="submit" class="btn btn-primary">{{ 'user.sign-up'|trans }}</button>
+                {#<a href="{{ path('security_login') }}">{{ 'user.yes-account'|trans }}</a>#}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
