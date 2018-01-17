@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table()
  * @ORM\Entity()
  * @UniqueEntity(fields={"email"}, message="user.exists")
  */

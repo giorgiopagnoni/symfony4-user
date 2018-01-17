@@ -215,7 +215,8 @@ class UserController extends AbstractController
      * @param $loginFormAuthenticator LoginFormAuthenticator
      * @return Response
      */
-    public function resetPassword(Request $request, User $user, GuardAuthenticatorHandler $authenticatorHandler, LoginFormAuthenticator $loginFormAuthenticator)
+    public function resetPassword(Request $request, User $user, GuardAuthenticatorHandler $authenticatorHandler,
+                                  LoginFormAuthenticator $loginFormAuthenticator, UserPasswordEncoderInterface $encoder)
     {
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('homepage'));
@@ -227,6 +228,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             $user->setToken(null);
 
             $em = $this->getDoctrine()->getManager();
