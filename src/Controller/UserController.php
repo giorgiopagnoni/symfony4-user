@@ -30,12 +30,12 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
- * @Route("/user")
+ * @Route("/user", name="user_")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/register", name="user_register")
+     * @Route("/register", name="register")
      * @param Request $request
      * @param TokenGenerator $tokenGenerator
      * @param UserPasswordEncoderInterface $encoder
@@ -84,7 +84,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/activate/{token}", name="user_activate")
+     * @Route("/activate/{token}", name="activate")
      * @param $request Request
      * @param $user User
      * @param GuardAuthenticatorHandler $authenticatorHandler
@@ -113,7 +113,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit", name="user_edit")
+     * @Route("/edit", name="edit")
      * @Security("has_role('ROLE_USER')")
      * @param $request Request
      * @param UserPasswordEncoderInterface $encoder
@@ -150,7 +150,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/request-password-reset", name="user_request_password_reset")
+     * @Route("/request-password-reset", name="request_password_reset")
      * @param Request $request
      * @param TokenGenerator $tokenGenerator
      * @param Mailer $mailer
@@ -208,7 +208,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/reset-password/{token}", name="user_reset_password")
+     * @Route("/reset-password/{token}", name="reset_password")
      * @param $request Request
      * @param $user User
      * @param $authenticatorHandler GuardAuthenticatorHandler
