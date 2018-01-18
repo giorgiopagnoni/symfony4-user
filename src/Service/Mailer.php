@@ -40,6 +40,8 @@ class Mailer
 
     /**
      * @param User $user
+     * @throws \Exception
+     * @throws \Throwable
      */
     public function sendActivationEmailMessage(User $user)
     {
@@ -55,6 +57,8 @@ class Mailer
 
     /**
      * @param User $user
+     * @throws \Exception
+     * @throws \Throwable
      */
     public function sendResetPasswordEmailMessage(User $user)
     {
@@ -73,6 +77,8 @@ class Mailer
      * @param $context array
      * @param $fromEmail string
      * @param $toEmail string
+     * @throws \Exception
+     * @throws \Throwable
      * @return bool
      */
     protected function sendMessage($templateName, $context, $fromEmail, $toEmail)
