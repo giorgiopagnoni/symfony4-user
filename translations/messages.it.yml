@@ -34,12 +34,3 @@ user:
 
 captcha.wrong: Devi dimostrare di non essere un robot
 rememberme: Ricordami
-
-addresses: Indirizzi
-address:
-  street: Via
-  zipcode: CAP
-  city: Città
-
-Tags: Descriviti
-tags.placeholder: Scegli uno o più aggettivi...
