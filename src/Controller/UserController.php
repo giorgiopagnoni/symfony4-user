@@ -191,7 +191,8 @@ class UserController extends AbstractController
                 if (!$user) {
                     $this->addFlash('warning', 'user.not-found');
                     return $this->render('user/request-password-reset.html.twig', [
-                        'form' => $form->createView()
+                        'form' => $form->createView(),
+                        'captchakey' => $captchaValidator->getKey()
                     ]);
                 }
 
