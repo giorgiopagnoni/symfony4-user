@@ -2,9 +2,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'it'
-    app.email_noreply: noreply@ciao.it
-    app.recaptcha_key: 6LeFN0EUAAAAADHet8kTXcxC8kaZBjEUNit3REKf
-    app.recaptcha_secret: 6LeFN0EUAAAAAJ-YjcGsBnx6olLRUka2sQMSn1sI
+    app.email_noreply: noreply@noreply.com
+    app.recaptcha_key: '%env(RECAPTCHA_KEY)%'
+    app.recaptcha_secret: '%env(RECAPTCHA_SECRET)%'
 
 services:
     # default configuration for services in *this* file
