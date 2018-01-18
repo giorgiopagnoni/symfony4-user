@@ -213,6 +213,7 @@ class UserController extends AbstractController
      * @param $user User
      * @param $authenticatorHandler GuardAuthenticatorHandler
      * @param $loginFormAuthenticator LoginFormAuthenticator
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
     public function resetPassword(Request $request, User $user, GuardAuthenticatorHandler $authenticatorHandler,
