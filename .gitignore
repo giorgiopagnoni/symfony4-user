@@ -1,3 +1,5 @@
+.idea
+.htaccess
 
 ###> symfony/framework-bundle ###
 .env
@@ -5,8 +7,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-.idea
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
