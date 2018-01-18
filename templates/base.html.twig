@@ -35,7 +35,7 @@
     </div>
 </nav>
 
-<div class="main-content" style="margin-top: 50px;">
+<div class="main-content" style="margin-top: 56px;">
     {% block flashmessages %}
         {% if app.session.flashbag.peekAll|length > 0 %}
             {% for type, messages in app.session.flashbag.all %}
@@ -49,7 +49,7 @@
             {% endfor %}
         {% endif %}
     {% endblock %}
-    <div style="min-height: 50px"></div>
+    <div style="min-height: 56px"></div>
     {% block content %}{% endblock %}
 </div>
 

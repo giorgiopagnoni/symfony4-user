@@ -34,6 +34,8 @@ use Symfony\Component\Validator\Exception\ValidatorException;
  */
 class UserController extends AbstractController
 {
+    const DOUBLE_OPT_IN = false;
+
     /**
      * @Route("/register", name="register")
      * @param Request $request
@@ -69,9 +71,14 @@ class UserController extends AbstractController
                 $em->persist($user);
                 $em->flush();
 
-                $mailer->sendActivationEmailMessage($user);
-                $this->addFlash('success', 'user.activation-link');
-                return $this->redirect($this->generateUrl('homepage'));
+                if (self::DOUBLE_OPT_IN) {
+                    $mailer->sendActivationEmailMessage($user);
+                    $this->addFlash('success', 'user.activation-link');
+                    return $this->redirect($this->generateUrl('homepage'));
+                }
+
+                return $this->redirect($this->generateUrl('user_activate', ['token' => $token]));
+
             } catch (ValidatorException $exception) {
 
             }
