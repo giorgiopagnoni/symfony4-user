@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
                 <h1>{{ 'user.edit'|trans }}</h1>
                 {{ form_start(form) }}
 
@@ -15,7 +15,7 @@
                 {{ form_row(form.password) }}
                 {{ form_row(form.name) }}
 
-                <button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+                <button type="submit" class="btn btn-default btn-primary btn-block" formnovalidate>{{ 'button.save'|trans }}</button>
                 {{ form_end(form) }}
             </div>
         </div>

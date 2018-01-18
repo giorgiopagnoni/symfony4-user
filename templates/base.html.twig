@@ -10,34 +10,28 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            {% block nav %}
-                <ul class="nav navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'site.name'|trans }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if is_granted('ROLE_USER') %}
-                        <li><a href="{{ path('user_edit') }}">{{ app.user.email }}</a></li>
-                        <li><a href="{{ path('security_logout') }}">{{ 'user.logout'|trans }}</a></li>
-                    {% else %}
-                        {#<li><a href="{{ path('user_register') }}">{{ 'user.sign-up'|trans }}</a></li>#}
-                        <li><a href="{{ path('security_login') }}">{{ 'user.login'|trans }}</a></li>
-                    {% endif %}
-                </ul>
-            {% endblock %}
-        </div><!--/.nav-collapse -->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        {% block nav %}
+            <ul class="navbar-nav">
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('user_edit') }}">{{ app.user.email }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('security_logout') }}">{{ 'user.logout'|trans }}</a></li>
+                {% else %}
+                    {#<li><a href="{{ path('user_register') }}">{{ 'user.sign-up'|trans }}</a></li>#}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('security_login') }}">{{ 'user.login'|trans }}</a></li>
+                {% endif %}
+            </ul>
+        {% endblock %}
     </div>
 </nav>
 
@@ -55,11 +49,9 @@
             {% endfor %}
         {% endif %}
     {% endblock %}
-    {% block body %}{% endblock %}
-    <div style="min-height: 50px"></div> {# TODO temporaneo#}
+    <div style="min-height: 50px"></div>
+    {% block content %}{% endblock %}
 </div>
-
-{% block content %}{% endblock %}
 
 {% block javascripts %}
     <script src="/build/app.js"></script>
