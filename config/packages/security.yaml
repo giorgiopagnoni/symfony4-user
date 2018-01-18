@@ -3,11 +3,13 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
+
     providers:
         db_provider:
             entity:
                 class: App\Entity\User
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -15,17 +17,12 @@ security:
         main:
             anonymous: ~
 
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # https://symfony.com/doc/current/security/form_login_setup.html
-
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
+            form_login:
+                login_path: security_login
+                check_path: security_login
+                username_parameter: login[_username]
+                password_parameter: login[_password]
+                remember_me: true
 
             remember_me:
                 secret:   '%kernel.secret%'
@@ -34,4 +31,4 @@ security:
                 path: /
 
             logout:
-                path: /logout
+                path: security_logout

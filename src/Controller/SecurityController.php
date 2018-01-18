@@ -15,10 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * @Route("/", name="security_")
+ */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -47,7 +50,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/logout", name="logout")
      * @throws \Exception
      */
     public function logoutAction()
