@@ -44,6 +44,7 @@ class UserController extends AbstractController
      * @param Mailer $mailer
      * @param CaptchaValidator $captchaValidator
      * @param TranslatorInterface $translator
+     * @throws \Throwable
      * @return Response
      */
     public function register(Request $request, TokenGenerator $tokenGenerator, UserPasswordEncoderInterface $encoder,
@@ -163,6 +164,7 @@ class UserController extends AbstractController
      * @param Mailer $mailer
      * @param CaptchaValidator $captchaValidator
      * @param TranslatorInterface $translator
+     * @throws \Throwable
      * @return Response
      */
     public function requestPasswordReset(Request $request, TokenGenerator $tokenGenerator, Mailer $mailer,
