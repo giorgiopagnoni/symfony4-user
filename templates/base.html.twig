@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{{ 'site.name'|trans }}{% endblock %}</title>
 
     {% block stylesheets %}
         <link rel="stylesheet" href="/build/app.css">
@@ -24,11 +24,14 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('user_edit') }}">{{ app.user.email }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('security_logout') }}">{{ 'user.logout'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('user_edit') }}">{{ app.user.email }}</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ path('security_logout') }}">{{ 'user.logout'|trans }}</a></li>
                 {% else %}
                     {#<li><a href="{{ path('user_register') }}">{{ 'user.sign-up'|trans }}</a></li>#}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('security_login') }}">{{ 'user.login'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ path('security_login') }}">{{ 'user.login'|trans }}</a></li>
                 {% endif %}
             </ul>
         {% endblock %}
