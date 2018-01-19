@@ -24,15 +24,12 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-/**
- * Class LoginFormAuthenticator
- * @package App\Security
- * Used only for automatic login after activating account or resetting password
- * TODO: can we avoid all this and do it some other way?
- */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
+    use TargetPathTrait;
+
     private $em;
     private $formFactory;
     private $passwordEncoder;
@@ -114,7 +111,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new RedirectResponse($this->getDefaultSuccessRedirectUrl());
+        $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
+
+        if (!$targetPath) {
+            $targetPath = $this->getDefaultSuccessRedirectUrl();
+        }
+
+        return new RedirectResponse($targetPath);
     }
 
     /**

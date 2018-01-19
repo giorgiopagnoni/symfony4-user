@@ -17,12 +17,17 @@ security:
         main:
             anonymous: ~
 
-            form_login:
-                login_path: security_login
-                check_path: security_login
-                username_parameter: login[_username]
-                password_parameter: login[_password]
-                remember_me: true
+# we use guard instead to automatically login the user after activation or password reset
+#            form_login:
+#                login_path: security_login
+#                check_path: security_login
+#                username_parameter: login[_username]
+#                password_parameter: login[_password]
+#                remember_me: true
+
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
 
             remember_me:
                 secret:   '%kernel.secret%'
