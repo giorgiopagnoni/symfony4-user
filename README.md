@@ -8,5 +8,5 @@ User registration and authentication with Symfony 4
 * User edit
 * Password reset (with ReCaptcha)
 * Optional double opt-in
-* Automatic login after registration or activation (see double opt-in) and after password reset
+* Automatic login after user activation and password reset
 * Bootstrap 4 theme
