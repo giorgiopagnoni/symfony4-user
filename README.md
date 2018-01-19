@@ -3,8 +3,7 @@ User registration and authentication with Symfony 4
 
 ## Features
 
-* User registration (with ReCaptcha)
-* User authentication
+* User registration (with ReCaptcha) and authentication
 * User edit
 * Password reset (with ReCaptcha)
 * Optional double opt-in
