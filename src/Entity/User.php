@@ -59,6 +59,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $token;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $googleId;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
@@ -169,6 +174,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setActivatedAt($activatedAt): void
     {
         $this->activatedAt = $activatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
+
+    /**
+     * @param mixed $googleId
+     */
+    public function setGoogleId($googleId): void
+    {
+        $this->googleId = $googleId;
     }
 
     // not used

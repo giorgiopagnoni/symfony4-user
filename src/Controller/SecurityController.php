@@ -10,8 +10,10 @@ namespace App\Controller;
 
 
 use App\Form\Security\LoginType;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -47,6 +49,25 @@ class SecurityController extends AbstractController
                 'error' => $error,
             ]
         );
+    }
+
+    /**
+     * @Route("/connect/google", name="connect_google")
+     * @param ClientRegistry $clientRegistry
+     * @return Response
+     */
+    public function googleConnectAction(ClientRegistry $clientRegistry)
+    {
+        return $clientRegistry->getClient('google_main')->redirect();
+    }
+
+    /**
+     * @Route("/connect/google/check", name="connect_google_check")
+     * @param $request Request
+     */
+    public function connectGoogleCheckAction(Request $request)
+    {
+        // nope, see OAuthAuhtenticator
     }
 
     /**

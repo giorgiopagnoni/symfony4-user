@@ -5,6 +5,8 @@ parameters:
     app.email_noreply: noreply@noreply.com
     app.recaptcha_key: '%env(RECAPTCHA_KEY)%'
     app.recaptcha_secret: '%env(RECAPTCHA_SECRET)%'
+    app.google_client_id: '%env(GOOGLE_CLIENT_ID)%'
+    app.google_client_secret: '%env(GOOGLE_CLIENT_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -37,3 +39,11 @@ services:
         arguments:
             $key: '%app.recaptcha_key%'
             $secret: '%app.recaptcha_secret%'
+
+knpu_oauth2_client:
+    clients:
+        google_main:
+            type: google
+            redirect_route: security_connect_google_check
+            client_id: "%app.google_client_id%"
+            client_secret: "%app.google_client_secret%"

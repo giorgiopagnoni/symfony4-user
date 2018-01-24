@@ -1,3 +1,11 @@
 @import "variables";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/font-awesome-sass/assets/stylesheets/font-awesome";
+
+.connect-with-google {
+  background-color: $googleRed;
+  color: white;
+  &:hover {
+    color: white;
+  }
+}
