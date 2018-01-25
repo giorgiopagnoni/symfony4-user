@@ -1,0 +1,4 @@
+user:
+  exists: This email has already been used
+  password:
+    must_be_complex: The password must contain at least one number, one lowercase character and one uppercase character.

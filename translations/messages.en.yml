@@ -1,0 +1,38 @@
+site:
+  name: My Website
+
+button:
+  save: Save
+user:
+  email: Email
+  password:
+    first: Password
+    second: Repeat password
+  name: Name
+
+  not-found: User not found
+
+  edit: Edit
+  forgot-password: I forgot my password
+  login: Login
+  logout: Logout
+  no-account: I don't have an account
+  reset-password: Reset password
+  sign-up: Sign up
+  update:
+    success: Your account has been updated
+    error: Please try again later
+
+  welcome: Welcome! You have signed in successfully
+  yes-account: I already have an account
+
+  activation-link: A link to activate your account has been sent to your inbox. Check it out!
+  request-password-link: A link to reset your password has been sent to your inbox. Check it out!
+  mailer:
+    activation.html: 'Click <a href="%activationUrl%" target="_blank">here</a> to activate your account'
+    activation.txt: 'Click on the following link to activate your account %activationUrl%'
+    reset-password.html: 'Click <a href="%resetPasswordUrl%" target="_blank">here</a> to reset your password'
+    reset-password.txt: 'Click on the following link to reset your password %resetPasswordUrl%'
+
+captcha.wrong: Please prove you are not a robot
+rememberme: Remember me
