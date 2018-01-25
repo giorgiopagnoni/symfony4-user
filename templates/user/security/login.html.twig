@@ -5,6 +5,13 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1>{{ 'user.login'|trans }}</h1>
+
+                <hr>
+                <a href="{{ path('security_connect_google') }}" class="btn btn-default btn-block connect-with-google">
+                    <i class="fa fa-google" aria-hidden="true"></i> -
+                    Google</a>
+                <hr>
+
                 {% if error %}
                     <div class="alert alert-danger">
                         {{ error.messageKey|trans(error.messageData, 'security') }}
