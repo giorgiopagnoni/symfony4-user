@@ -1,7 +1,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'it'
+    locale: 'en'
     app.email_noreply: noreply@noreply.com
     app.recaptcha_key: '%env(RECAPTCHA_KEY)%'
     app.recaptcha_secret: '%env(RECAPTCHA_SECRET)%'
