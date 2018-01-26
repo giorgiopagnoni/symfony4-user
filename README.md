@@ -12,6 +12,9 @@ skeleton for projects that require user registration and authentication with Sym
 
 ## Usage
 
-Set environment variables in .env; you'll need a db, a mailer and recaptcha keys.
-Then run  `php bin/console doctrine:database:create` and `php bin/console doctrine:migrations:migrate`.
+Set environment variables in .env; you'll need a db, a mailer and recaptcha keys. Then run
+
+	$ php bin/console doctrine:database:create
+	$ php bin/console doctrine:migrations:migrate
+  
 If you are using Apache you might need a `.htaccess` file.
