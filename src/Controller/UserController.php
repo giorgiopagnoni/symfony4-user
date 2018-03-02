@@ -92,7 +92,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/activate/{token}", name="activate")
+     * @Route("/activate/{token}", name="user_activate")
      * @param $request Request
      * @param $user User
      * @param GuardAuthenticatorHandler $authenticatorHandler
