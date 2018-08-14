@@ -1,5 +1,6 @@
 # symfony4-user
 skeleton for projects that require user registration and authentication with Symfony 4
+
 checkout the branch "oauth" for google and facebook sign-in!
 
 ## Features
